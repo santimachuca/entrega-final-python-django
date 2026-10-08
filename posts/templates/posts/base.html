@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Blog de Patrick Jane{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'posts/site.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav container" aria-label="Navegación principal">
+            <a class="brand" href="{% url 'posts:lista' %}">Blog de Patrick Jane</a>
+            <div class="nav-links">
+                <a href="{% url 'posts:lista' %}">Publicaciones</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'posts:crear' %}">Crear post</a>
+                    <a href="{% url 'perfil' %}">Mi perfil</a>
+                    <form action="{% url 'logout' %}" method="post" class="inline-form">
+                        {% csrf_token %}
+                        <button type="submit" class="nav-button">Salir</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">Ingresar</a>
+                    <a class="nav-signup" href="{% url 'registro' %}">Registrarse</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    <main class="container">{% block content %}{% endblock %}</main>
+    <footer class="site-footer container">Un blog hecho con Django · Patrick Jane</footer>
+</body>
+</html>

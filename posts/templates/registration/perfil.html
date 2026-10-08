@@ -1,0 +1,22 @@
+{% extends "posts/base.html" %}
+
+{% block title %}Mi perfil | Blog de Patrick Jane{% endblock %}
+
+{% block content %}
+<section class="page-heading">
+    <div>
+        <p class="eyebrow">Tu espacio</p>
+        <h1>Perfil de {{ user.username }}</h1>
+        <p>{{ user.get_full_name|default:user.username }}{% if user.email %} · {{ user.email }}{% endif %}</p>
+    </div>
+    <a class="button" href="{% url 'editar_perfil' %}">Editar perfil</a>
+</section>
+<h2>Mis publicaciones</h2>
+<ul class="post-list">
+    {% for post in posts %}
+        <li><a href="{% url 'posts:detalle' post.pk %}">{{ post.titulo }}</a> <span class="meta">{{ post.fecha_creacion|date:"d/m/Y" }}</span></li>
+    {% empty %}
+        <li>Aún no publicaste nada.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

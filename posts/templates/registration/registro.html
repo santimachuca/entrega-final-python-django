@@ -1,0 +1,14 @@
+{% extends "posts/base.html" %}
+
+{% block title %}Registrarse | Blog de Patrick Jane{% endblock %}
+
+{% block content %}
+<section class="form-panel">
+    <h1>Crear cuenta</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Registrarme</button>
+    </form>
+</section>
+{% endblock %}

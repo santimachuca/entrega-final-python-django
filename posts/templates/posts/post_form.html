@@ -1,0 +1,17 @@
+{% extends "posts/base.html" %}
+
+{% block title %}{{ titulo }} | Blog de Patrick Jane{% endblock %}
+
+{% block content %}
+<section class="form-panel">
+    <h1>{{ titulo }}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="actions">
+            <button class="button" type="submit">Guardar</button>
+            <a class="button button-secondary" href="{% url 'posts:lista' %}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

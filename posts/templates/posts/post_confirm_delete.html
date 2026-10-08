@@ -1,0 +1,17 @@
+{% extends "posts/base.html" %}
+
+{% block title %}Eliminar publicación | Blog de Patrick Jane{% endblock %}
+
+{% block content %}
+<section class="form-panel">
+    <h1>Eliminar publicación</h1>
+    <p>¿Seguro que querés eliminar «{{ post.titulo }}»? Esta acción no se puede deshacer.</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="actions">
+            <button class="button button-danger" type="submit">Sí, eliminar</button>
+            <a class="button button-secondary" href="{% url 'posts:detalle' post.pk %}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

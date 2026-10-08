@@ -1,0 +1,19 @@
+{% extends "posts/base.html" %}
+
+{% block title %}{{ post.titulo }} | Blog de Patrick Jane{% endblock %}
+
+{% block content %}
+<a class="back-link" href="{% url 'posts:lista' %}">← Volver a publicaciones</a>
+<article class="post-detail">
+    <p class="meta">{{ post.fecha_creacion|date:"d/m/Y" }} · Por {{ post.autor.username }}</p>
+    <h1>{{ post.titulo }}</h1>
+    {% if post.imagen %}<img class="detail-image" src="{{ post.imagen.url }}" alt="Imagen de {{ post.titulo }}">{% endif %}
+    <div class="post-content">{{ post.contenido|linebreaks }}</div>
+    {% if user == post.autor %}
+        <div class="actions">
+            <a class="button" href="{% url 'posts:editar' post.pk %}">Editar</a>
+            <a class="button button-danger" href="{% url 'posts:eliminar' post.pk %}">Eliminar</a>
+        </div>
+    {% endif %}
+</article>
+{% endblock %}
